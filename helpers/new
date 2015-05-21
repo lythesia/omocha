@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+CC = <<TEMPLATE
+#include <bits/stdc++.h>
+using namespace std;
+
+#define inject(x) { cerr << "Function: " << __FUNCTION__ << ", Line: " << __LINE__ << ", " << #x << ": " << (x) << endl; }
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+typedef vector<vs> vvs;
+
+TEMPLATE
+templated = {
+  "CC"  => true,
+}
+
+typed = {
+  "LEET" => true,
+}
+
+if ARGV.size != 0
+  source = "#{ARGV[0].split('.').first}/#{ARGV[0]}"
+  puts "#{source} .."
+
+  File.open('.last', 'w') do |f|
+    f.puts source
+  end
+
+  # basename as type
+  exit 0 unless typed[`basename $(pwd)`.chomp.upcase]
+
+  ext = ARGV[0].split('.').last.upcase
+  if templated[ext] and !FileTest::exist?(source)
+    dir = File.dirname source
+    FileUtils.mkdir_p(dir) unless File.directory? dir
+
+    File.open(source, 'w') do |f|
+      f.puts eval(ext)
+    end
+  end
+
+  exec "vim #{source}"
+else
+  exec "vim"
+end
