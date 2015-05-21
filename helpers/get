@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+def pbcopy(input)
+  IO.popen('pbcopy', 'w') { |f| f << input.to_s }
+end
+
+templated = {
+  "LEET" => {start: /^typedef/, end: /^};$/},
+}
+
+t = `basename $(pwd)`.chomp.upcase
+if templated[t]
+  input = String.new
+  f = `cat .last`.chomp
+  File.open(f).each_line do |line|
+    input << line if line =~ templated[t][:start]..line =~ templated[t][:end]
+  end
+  pbcopy input
+  puts "copy #{f} .."
+else
+  `cat (cat .last) | pbcopy`
+  puts "copy #{source} .."
+end
