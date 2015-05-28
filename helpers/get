@@ -18,6 +18,7 @@ if templated[t]
   pbcopy input
   puts "copy #{f} .."
 else
-  `cat (cat .last) | pbcopy`
-  puts "copy #{source} .."
+  f = `cat .last`.chomp
+  `cat #{f} | pbcopy`
+  puts "copy #{f} .."
 end
