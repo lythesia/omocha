@@ -24,7 +24,7 @@ typed = {
 }
 
 if ARGV.size != 0
-  source = "#{ENV['where']}/#{ARGV[0].split('.').first}/#{ARGV[0]}"
+  source = "#{ENV['where'] || '.'}/#{ARGV[0].split('.').first}/#{ARGV[0]}"
   puts "#{source} .."
 
   File.open('.last', 'w') do |f|
