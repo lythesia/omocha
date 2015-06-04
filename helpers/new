@@ -14,13 +14,23 @@ typedef vector<string> vs;
 typedef vector<vs> vvs;
 
 TEMPLATE
+RB = <<TEMPLATE
+#!/usr/bin/env ruby
+
+TEMPLATE
+
 templated = {
   "CC"  => true,
+  "RB"  => true,
 }
 
 typed = {
   "LEET" => true,
-  "PAT" => true,
+  "PAT"  => true,
+}
+
+xmod = {
+  "RB" => true,
 }
 
 if ARGV.size != 0
@@ -42,6 +52,8 @@ if ARGV.size != 0
     File.open(source, 'w') do |f|
       f.puts eval(ext)
     end
+
+    File.chmod(0755, source) if xmod[ext]
   end
 
   exec "vim #{source}"

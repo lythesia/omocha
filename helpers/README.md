@@ -5,14 +5,14 @@ Algo code helper thanks [magicae](https://github.com/magicae/helpers)!
 templates:
 
 - [x] CC
-- [ ] RB
+- [x] RB
 - [ ] PY
 - [ ] SH
 
 types:
 
 - [x] LEET
-- [ ] PAT
+- [x] PAT
 - [ ] XOJ(?)
 
 depends since me so weak!
